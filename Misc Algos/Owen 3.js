@@ -16,31 +16,32 @@ const solution = (paragraphs, align, width) => {
     // helper method
     const alignText = (align, text) => {
       let pLine = '*';
-      let spacing = text.length < width ? pLine += '_'.repeat(width-text.length) : '';
+      let spacing = text.length < width ? ' '.repeat(width-text.length) : '';
       if(align === 'LEFT'){
-        pLine += text;
+        pLine += text + spacing;
       }
       else {
-        pLine += text + ']';
+        pLine += text;
       }
       output.push(pLine + '*');
     }
 
-
     // iterate through string in subarray
-    j=0
-    words = ''    
-    while(words.length < width && line[j]) {
-      words += line[j] + ' '
-      j++;
-    }
-      console.log(words)
-      alignText(align[i],words.slice(0,-1))
+    let word = ' '
+    for(let j = 0; j < line.length; j++) {
+      while(line[j+1] && line[j+1].length + word.length < width){
+        word += line[j] + ' ';
+        
+      }
+
+      word
     }
 
-    
-    output.push(start_end);
-    return output;
+  }
+  // adding footer
+  output.push(start_end);
+  return output;
+  
   
     // const helper = (_line, _align) => {
     //   if(totalLength === width){
@@ -62,8 +63,8 @@ const solution = (paragraphs, align, width) => {
     //     }
     //   }
     // };
-  
- };
+
+};
   
  console.log(solution([['hello', 'world'], 
                        ['how', 'areYou', 'doing'], 
